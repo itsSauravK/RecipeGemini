@@ -1,19 +1,30 @@
 package com.recipes.springboot.RecipeGemini.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document("recipes")
 @Getter
 @Setter
-@RequiredArgsConstructor
 
 public class Recipe {
 
+    @Id
+    private String id;
+    @JsonProperty(value="name")
     private String name;
-    private int timeInMinutes;
-    private String steps[];
+    @JsonProperty(value="steps")
+    private List<String> steps;
+
+    public Recipe(String name, List<String> steps){
+        super();
+        this.name = name;
+        this.steps = steps;
+    }
 
 }
