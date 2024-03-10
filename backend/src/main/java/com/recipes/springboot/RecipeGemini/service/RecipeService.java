@@ -5,6 +5,7 @@ import com.recipes.springboot.RecipeGemini.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,14 @@ public class RecipeService {
     }
 
     public void addRecipe(Recipe recipe){
-        List<String> res = new ArrayList<>();
         recipeRepository.save(recipe);
+    }
+
+    public Recipe getRecipe(String id){
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+        return recipe.orElse(new Recipe());
+    }
+    public void deleteRecipe(String id){
+        recipeRepository.deleteById(id);
     }
 }
