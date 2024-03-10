@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,18 @@ public class RecipeService {
     }
     public void deleteRecipe(String id){
         recipeRepository.deleteById(id);
+    }
+
+    public Recipe updateRecipe(Recipe recipe){
+        Optional<Recipe> oldRecipeOptional = recipeRepository.findById(recipe.getId());
+        if(oldRecipeOptional.isPresent()) {
+            Recipe oldRecipe = oldRecipeOptional.get();
+            oldRecipe.setName(recipe.getName());
+            oldRecipe.setSteps(recipe.getSteps());
+            return recipeRepository.save(oldRecipe);
+        }else{
+            throw new NoSuchElementException("Recipe with ID " + recipe.getId() + " not found");
+        }
+
     }
 }

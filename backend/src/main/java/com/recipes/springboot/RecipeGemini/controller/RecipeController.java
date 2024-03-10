@@ -35,4 +35,9 @@ public class RecipeController {
     public void deleteRecipe(@RequestBody Map<String, String> requestBody) {
          recipeService.deleteRecipe(requestBody.get("id"));
     }
+
+    @PutMapping("/getRecipe")
+    public Recipe updateRecipe(@RequestBody Recipe recipe){
+        return recipeService.updateRecipe(recipe);
+    }
 }
