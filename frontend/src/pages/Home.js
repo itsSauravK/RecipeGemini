@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import RecipeCard from "../component/RecipeCard";
 
 const Home = () => {
     const [recipes, setRecipes] = useState([]);
@@ -9,19 +10,16 @@ const Home = () => {
         const response = await result.json();
         setRecipes(response);
         setLoading(false);
-        console.log(recipes);
     }
     useEffect(() => {
         getRecipes();
     }, []);
     return (
         <div>
-            <h1>Home</h1>
-            <p>Welcome to the home page!</p>
+            <h1>Recipes</h1>
+            
             {loading ? <p>Loading ...</p> : recipes.map((recipe, index) => (
-                <div key={index}>
-                    <p>{recipe.name}</p>
-                </div>
+                <RecipeCard key={index} name={recipe.name} id={recipe.id} />
             ))}
         </div>
     );
