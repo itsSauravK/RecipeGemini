@@ -9,6 +9,7 @@ const Home = () => {
         setLoading(true)
         const result = await fetch(`${process.env.REACT_APP_API_URL}/getAllRecipe`);
         const response = await result.json();
+        console.log(response)
         setRecipes(response);
         setLoading(false);
     }

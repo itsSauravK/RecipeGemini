@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories
-@EnableCaching
 public class RecipeGeminiApplication {
 
 	public static void main(String[] args) {
