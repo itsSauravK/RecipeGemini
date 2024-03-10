@@ -5,14 +5,13 @@ import com.recipes.springboot.RecipeGemini.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class RecipeService {
+public class RecipeService implements RecipeInterface{
     @Autowired
     RecipeRepository recipeRepository;
     public List<Recipe> getAllRecipes(){
