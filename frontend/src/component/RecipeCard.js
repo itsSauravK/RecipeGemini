@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 const RecipeCard = ({name, id, description}) => {
     return (
-        <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
+        <div class="min-w-40 relative ml-10 flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
             <div class="p-6">
                 <h5 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
                     {name}

@@ -17,19 +17,22 @@ const Home = () => {
     }, []);
     return (
         
-        <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
+        <section className="w-full py-12 md:py-12 lg:py-24">
+        <div>
           <div className="flex flex-col space-y-4">
             <div className="space-y-2 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Recipes</h2>
+              <h2 className="text-3xl font-bold tracking-tighter">Recipes</h2>
               <p className="mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                 Delicious recipes to inspire your next meal.
               </p>
             </div>
-            {loading ? <p>Loading ...</p> : recipes.map((recipe, index) => (
-                 <RecipeCard key={index} name={recipe.name} id={recipe.id} description={recipe.description} />
-            ))}
-            <div className="flex p-3">
+            <div className="grid grid-rows-2 grid-flow-col gap-1">
+                {loading ? <p>Loading ...</p> : recipes.map((recipe, index) => (
+                    <>
+                    <RecipeCard key={index} name={recipe.name} id={recipe.id} description={recipe.description} /> 
+                    </>
+                ))}
+            </div>
                
             <div className="flex justify-center">
                 <Link to={`/generate`}>
@@ -42,7 +45,6 @@ const Home = () => {
                 </Link>
             </div>
           </div>
-        </div>
         </div>
       </section>
        
