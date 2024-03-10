@@ -75,7 +75,7 @@ const Gemini = () => {
     };
     return (
        <div>
-           <h1>Generative AI Restaurant App!</h1>
+           <h1>Generative Recipe</h1>
        
            <div style={{ display: 'flex' }}>
              <input placeholder='Search for Recipe' onChange={(e) => handleChangeSearch(e)} />
