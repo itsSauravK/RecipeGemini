@@ -9,7 +9,6 @@ const Home = () => {
         setLoading(true)
         const result = await fetch(`${process.env.REACT_APP_API_URL}/getAllRecipe`);
         const response = await result.json();
-        console.log(response)
         setRecipes(response);
         setLoading(false);
     }
@@ -27,7 +26,7 @@ const Home = () => {
                 Delicious recipes to inspire your next meal.
               </p>
             </div>
-            <div className="grid grid-rows-2 grid-flow-col gap-1">
+            <div className="grid grid-cols-3 gap-4">
                 {loading ? <p>Loading ...</p> : recipes.map((recipe, index) => (
                     <>
                     <RecipeCard key={index} name={recipe.name} id={recipe.id} description={recipe.description} /> 

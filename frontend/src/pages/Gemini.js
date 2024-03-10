@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import React, { useState } from "react";
-import { json } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 const model_image = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
@@ -16,6 +17,7 @@ const getBase64 = (file) => new Promise(function (resolve, reject) {
 
 const Gemini = () => {
     const [aiResponse, setResponse] = useState('');
+    const navigate = useNavigate();
     const [recipe, setRecipe] = useState({
         name: "",
         description: "",
@@ -26,6 +28,24 @@ const Gemini = () => {
     const [imageInineData, setImageInlineData] = useState('');
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
+    const handleSubmit = async () => {
+        setLoading(true);
+        const url = `${process.env.REACT_APP_API_URL}/addRecipe`;
+        try {
+            await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: recipe.name, description: recipe.description, steps: recipe.steps}),
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        setLoading(false);
+        navigate('/');
+    };    
+        
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
     }
@@ -297,7 +317,7 @@ const Gemini = () => {
     
     {/* Button to submit changes */}
     <button
-      onClick={() => console.log("Updated Recipe:", recipe)}
+      onClick={() => handleSubmit()}
       className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
     >
       Save
