@@ -3,6 +3,7 @@ package com.recipes.springboot.RecipeGemini.service;
 import com.recipes.springboot.RecipeGemini.model.Recipe;
 import com.recipes.springboot.RecipeGemini.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class RecipeService implements RecipeInterface{
     @Autowired
     RecipeRepository recipeRepository;
+    @Cacheable("recipes")
     public List<Recipe> getAllRecipes(){
         Optional<List<Recipe>> recipesOptional = Optional.ofNullable(recipeRepository.findAll());
         return recipesOptional.orElse(new ArrayList<>());
