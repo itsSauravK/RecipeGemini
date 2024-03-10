@@ -15,7 +15,7 @@ import java.util.Optional;
 public class RecipeService implements RecipeInterface{
     @Autowired
     RecipeRepository recipeRepository;
-    @Cacheable("recipes")
+
     public List<Recipe> getAllRecipes(){
         Optional<List<Recipe>> recipesOptional = Optional.ofNullable(recipeRepository.findAll());
         return recipesOptional.orElse(new ArrayList<>());
@@ -39,6 +39,7 @@ public class RecipeService implements RecipeInterface{
             Recipe oldRecipe = oldRecipeOptional.get();
             oldRecipe.setName(recipe.getName());
             oldRecipe.setSteps(recipe.getSteps());
+            oldRecipe.setDescription(recipe.getDescription());
             return recipeRepository.save(oldRecipe);
         }else{
             throw new NoSuchElementException("Recipe with ID " + recipe.getId() + " not found");

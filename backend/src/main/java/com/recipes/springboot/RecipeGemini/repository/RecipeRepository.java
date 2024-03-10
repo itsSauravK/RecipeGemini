@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 
 public interface RecipeRepository extends MongoRepository<Recipe, String> {
-    @Query(value = "{}", fields="{'id' : 1, 'name' : 1}")
+    @Query(value = "{}", fields="{'id' : 1, 'name' : 1, 'description' : 1}")
     List<Recipe> findAll();
     long count();
 }

@@ -20,11 +20,12 @@ public class Recipe {
     private String name;
     @JsonProperty(value="steps")
     private List<String> steps;
-
+    private String description;
     public Recipe(){}
 
-    public Recipe(String name, List<String> steps){
+    public Recipe(String name, List<String> steps, String description){
         super();
+        this.description = description;
         this.name = name;
         this.steps = steps;
     }
