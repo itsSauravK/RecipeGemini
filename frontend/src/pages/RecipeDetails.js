@@ -14,14 +14,13 @@ const RecipeDetails = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: id }), // Set the ID as the body
+                body: JSON.stringify({ id: id }),
             });   
             const responseData = await response.json();
             console.log(responseData);
             setRecipeSteps(responseData);
         } catch (error) {
             console.error('Error:', error);
-            // Handle errors or throw them to the calling function
         }
         
         setLoading(false);

@@ -14,10 +14,17 @@ const Gemini = () => {
 
     async function aiRun() {
       setLoading(true);
-      const prompt = `generate steps to cook ${search}. Generate it in the form of {"name": "recipe name", "steps": ["step 1", "step 2", "step 3"]}`;
+      const prompt = `generate steps to cook ${search}. Generate it in the form of {"name": "recipe name","description" : "recipe description", "steps": ["step 1", "step 2", "step 3"]}`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
+      console.log(text);
+      try{
+        console.log(JSON.parse(text));
+      }
+      catch{
+        setResponse('Error generating recipe');
+      }
       setResponse(text);
       setLoading(false);
     }
