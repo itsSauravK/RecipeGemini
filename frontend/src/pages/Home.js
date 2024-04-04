@@ -1,20 +1,41 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import RecipeCard from "../component/RecipeCard";
 import { Link } from "react-router-dom";
 
 const Home = () => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
-    async function getRecipes() {
-        setLoading(true)
-        const result = await fetch(`${process.env.REACT_APP_API_URL}/getAllRecipe`);
-        const response = await result.json();
-        setRecipes(response);
-        setLoading(false);
-    }
+    // async function getRecipes() {
+    //     setLoading(true)
+    //     const result = await fetch(`${process.env.REACT_APP_API_URL}/getAllRecipe`);
+    //     const response = await result.json();
+    //     setRecipes(response);
+    //     setLoading(false);
+    // }
     useEffect(() => {
+
+        let controller = new AbortController();
+        const getRecipes = async () => {
+          setLoading(true);
+          try{
+            const result = await fetch(`${process.env.REACT_APP_API_URL}/getAllRecipe`,{
+              signal: controller.signal
+            });
+            const response = await result.json();
+            setRecipes(response);
+            controller = null;
+          }catch(e){
+            setRecipes([]);
+            console.log(e);
+          }  
+          setLoading(false);
+        }
         getRecipes();
+        return () => {
+          controller?.abort();
+        }
     }, []);
+
     return (
         
         <section className="w-full py-12 md:py-12 lg:py-24">
