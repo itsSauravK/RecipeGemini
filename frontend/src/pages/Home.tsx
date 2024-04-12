@@ -1,43 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
 import RecipeCard from "../component/RecipeCard";
 import { Link } from "react-router-dom";
-
+import React from "react";
+import { useGetDataFromEndpoint } from "../hooks/useGetDataFromEndpoint.tsx";
+type Recipe = {
+  id: string;
+  name: string;
+  description: string;
+};
 const Home = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
-  // async function getRecipes() {
-  //     setLoading(true)
-  //     const result = await fetch(`${process.env.REACT_APP_API_URL}/getAllRecipe`);
-  //     const response = await result.json();
-  //     setRecipes(response);
-  //     setLoading(false);
-  // }
-  useEffect(() => {
-    let controller = new AbortController();
-    const getRecipes = async () => {
-      setLoading(true);
-      try {
-        const result = await fetch(
-          `${process.env.REACT_APP_API_URL}/getAllRecipe`,
-          {
-            signal: controller.signal,
-          }
-        );
-        const response = await result.json();
-        setRecipes(response);
-        controller = null;
-      } catch (e) {
-        setRecipes([]);
-        console.log(e);
-      }
-      setLoading(false);
-    };
-    getRecipes();
-    return () => {
-      controller?.abort();
-    };
-  }, []);
-
+  const { data, loading, error } = useGetDataFromEndpoint<Recipe[]>(
+    `${process.env.REACT_APP_API_URL}/getAllRecipe`
+  );
   return (
     <section className="w-full py-12 md:py-12 lg:py-24">
       <div>
@@ -52,7 +25,7 @@ const Home = () => {
             {loading ? (
               <p>Loading ...</p>
             ) : (
-              recipes.map((recipe, index) => (
+              data?.map((recipe, index) => (
                 <>
                   <RecipeCard
                     key={index}
