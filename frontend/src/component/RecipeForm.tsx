@@ -40,6 +40,7 @@ export const RecipeForm = ({
           value={recipe.description}
           onChange={handleDescriptionChange}
           className="w-full border border-gray-300 px-3 py-2 rounded-md resize-vertical focus:outline-none text-sm"
+          rows={5}
         />
       </div>
 
