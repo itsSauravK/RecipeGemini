@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import RecipeDetails, { RecipeDetail } from "./RecipeDetails";
-import { RecipeForm } from "../component/RecipeForm";
+import { RecipeForm } from "../component/RecipeForm.tsx";
 
 const UpdateRecipe = () => {
   const location = useLocation();
@@ -60,7 +60,7 @@ const UpdateRecipe = () => {
   const handleAddStep = () => {
     setRecipe({
       ...recipe,
-      steps: [...(recipe?.steps ?? [])],
+      steps: [...(recipe?.steps ?? []), ""],
     });
   };
 
