@@ -2,7 +2,7 @@ import RecipeCard from "../component/RecipeCard";
 import { Link } from "react-router-dom";
 import React from "react";
 import { useGetDataFromEndpoint } from "../hooks/useGetDataFromEndpoint.tsx";
-type Recipe = {
+export type Recipe = {
   id: string;
   name: string;
   description: string;

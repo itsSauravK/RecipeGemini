@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Gemini from "./pages/Gemini";
-import RecipeDetails from "./pages/RecipeDetails";
+import RecipeDetails from "./pages/RecipeDetails.tsx";
 import UpdateRecipe from "./pages/UpdateRecipe";
 import ErrorBoundary from "./component/ErrorBoundary";
 import "./index.css";
