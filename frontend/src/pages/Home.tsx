@@ -1,4 +1,4 @@
-import RecipeCard from "../component/RecipeCard";
+import RecipeCard from "../component/RecipeCard.tsx";
 import { Link } from "react-router-dom";
 import React from "react";
 import { useGetDataFromEndpoint } from "../hooks/useGetDataFromEndpoint.tsx";
